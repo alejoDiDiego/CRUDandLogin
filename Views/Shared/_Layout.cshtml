@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Trabajo Integrador</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="body">
+    <header>
+        <nav class="barra navbar navbar-expand-sm navbar-toggleable-sm text-white   border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trabajo Integrador</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 ml-4">
+                        @if(Usuario.usuarioActual != null && Usuario.usuarioActual.Tipo == "vendedor")
+                        {
+                            <li class="nav-item border-right pr-1">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+
+                            <li class="nav-item border-right pl-1 pr-1">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Publicaciones" asp-action="CrearPublicacion">Crear Publicacion</a>
+                            </li>
+
+                            <li class="nav-item ml-1 pl-1">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Publicaciones" asp-action="VerPublicaciones">Mis Publicaciones</a>
+                            </li>
+                        }
+                        
+                    </ul>
+                    @if(Usuario.usuarioActual == null)
+                    {
+                        <div>
+                            <button class="btn btn-info" onclick=location.href='@Url.Action("IniciarSesion", "Usuarios")'>Iniciar Sesion</button>
+                            <button class="btn btn-primary" onclick=location.href='@Url.Action("Registrarse", "Usuarios")'>Registrarse</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex ">
+                            <p class="mr-3 my-auto nombre">@Usuario.usuarioActual.Nombre</p>
+                            <button class="btn btn-danger" onclick=location.href='@Url.Action("CerrarSesion", "Usuarios")'>Cerrar Sesion</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Trabajo Integrador</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+    .body{
+        background-color: #DFF6FF;
+    }
+
+    .barra{
+        background-color: #1F4690;
+        color: white;
+    }
+
+    .navbar-brand{
+        color: #DFF6FF;
+        font-weight: bold;
+    }
+    .navbar-brand:hover{
+        color: #47B5FF;
+
+    }
+
+    .nombre{
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: end;
+    }
+</style>

@@ -1,0 +1,81 @@
+﻿@if(ViewBag.PublicacionCreada != null && ViewBag.PublicacionCreada != "")
+{
+    <script type="text/javascript">  
+        window.onload = function () {  
+            alert("@ViewBag.PublicacionCreada");  
+        };  
+    </script>  
+}
+
+<div>
+    @{
+        IEnumerable<Publicacion> publicacionesVendedor = Publicacion.publicaciones.Where(p => p.EmailVendedor == Usuario.usuarioActual.Email);
+        if(publicacionesVendedor.ToList().Count == 0)
+        {
+                    <p class="h2">No publicó nada</p>
+        }
+        else
+        {
+                    <p class="h1 p-2 mb-3 mt-3 ">Mis publicaciones</p>
+                    <div class="d-flex flex-wrap  publicaciones">
+                    @foreach(Publicacion p in publicacionesVendedor)
+            {
+
+                        <div class="card publicacion">
+                          <div class="card-header text-white d-flex justify-content-between header"><p class="my-auto">$@p.Precio</p> <p class="my-auto font-weight-bold">ID: @p.Id</p></div>
+                          <div class="card-body">
+                            <h5 class="card-title titulo">@p.Titulo</h5>
+                            <p class="card-text descripcion">@p.Descripcion</p>
+                            
+                          </div>
+                        </div>
+            }
+                    </div>
+        }
+    }
+</div>
+<style>
+
+    .publicacion{
+        height: 300px;
+        width: 300px;
+        margin: 15px;
+    }
+
+    .header{
+        height: 55px;
+    }
+
+    .card-header{
+        background-color: #396EB0;
+    }
+
+    .titulo{
+        overflow: hidden;
+        display: -webkit-box;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 50px;
+        color: #1363DF;
+    }
+
+
+    .descripcion{
+        overflow: hidden;
+        display: -webkit-box;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        max-width: 200px;
+    }
+
+
+    .h1{
+        color: #1363DF;
+    }
+
+
+    
+
+</style>

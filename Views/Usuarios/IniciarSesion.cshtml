@@ -1,0 +1,25 @@
+﻿<div>
+    <p class="h1">Iniciar Sesion</p>
+
+    <form action="@Url.Action("Iniciar", "Usuarios")" class="w-75">
+        <div class="form-group mt-4">
+            <label>Email</label>
+            <input name="email" type="email" class="form-control" placeholder="Email" />
+            <label>@ViewBag.ErrorMail</label>
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input required name="contrasena" type="text" class="form-control" placeholder="Contraseña" />
+            <label>@ViewBag.ErrorContrasena</label>
+        </div>
+
+        <input type="submit" value="Iniciar Sesion" class="btn btn-primary" />
+    </form>
+
+</div>
+
+<style>
+    .h1{
+        color: #1363DF;
+     }
+</style>
